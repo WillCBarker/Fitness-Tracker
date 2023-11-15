@@ -2,7 +2,7 @@ package com.willcb.fitnesstrackerbackend.service;
 
 import com.willcb.fitnesstrackerbackend.model.WorkoutPlan;
 import com.willcb.fitnesstrackerbackend.repository.WorkoutPlanRepository;
-import com.willcb.fitnesstrackerbackend.controller.dto.WorkoutDetailsDTO;
+import com.willcb.fitnesstrackerbackend.dto.WorkoutDetailsDTO;
 import com.willcb.fitnesstrackerbackend.model.User;
 import com.willcb.fitnesstrackerbackend.model.Workout;
 

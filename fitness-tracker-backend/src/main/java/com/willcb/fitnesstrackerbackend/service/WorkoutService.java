@@ -1,12 +1,11 @@
 package com.willcb.fitnesstrackerbackend.service;
 
-import com.willcb.fitnesstrackerbackend.controller.dto.ExerciseDetailsDTO;
+import com.willcb.fitnesstrackerbackend.dto.ExerciseDetailsDTO;
 import com.willcb.fitnesstrackerbackend.model.Exercise;
 import com.willcb.fitnesstrackerbackend.model.Workout;
 import com.willcb.fitnesstrackerbackend.repository.WorkoutRepository;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
