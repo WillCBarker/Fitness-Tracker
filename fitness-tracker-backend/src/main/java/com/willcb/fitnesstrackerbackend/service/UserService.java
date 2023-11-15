@@ -42,17 +42,10 @@ public class UserService {
         User existingUser = userRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("User not found"));
 
-        // Update existingUser with values from updatedUser
-        // ...
-
         return userRepository.save(existingUser);
     }
 
     public boolean deleteUser(Long id) {
-        // Business logic for deleting a user
-        // ...
-
-        // Check if the user exists
         if (userRepository.existsById(id)) {
             userRepository.deleteById(id);
             return true;
