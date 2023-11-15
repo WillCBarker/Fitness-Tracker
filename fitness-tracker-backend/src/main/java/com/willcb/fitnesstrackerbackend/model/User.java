@@ -12,9 +12,9 @@ public class User {
     private Long id;
 
     private String name;
-    private int age;
-    private double weight;
-    private double height;
+    private int age = 0;
+    private double weight = 0.0;
+    private double height = 0.0;
     private String gender;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)

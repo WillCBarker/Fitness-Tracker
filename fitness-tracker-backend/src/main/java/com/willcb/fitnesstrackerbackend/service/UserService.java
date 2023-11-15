@@ -17,7 +17,7 @@ public class UserService {
 
      private void validateUser(User user) {
         // Validate user input
-        if (user == null || user.getName() == null || user.getAge() == 0 || user.getHeight() == 0 || user.getWeight() == 0 || user.getGender() == null) {
+        if (user == null || user.getName() == null || user.getAge() <= 0 || user.getHeight() <= 0 || user.getWeight() <= 0 || user.getGender() == null) {
             throw new IllegalArgumentException("User details are incomplete");
         }
     }
