@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.willcb.fitnesstrackerbackend.controller.dto.ExerciseDetailsDTO;
+import com.willcb.fitnesstrackerbackend.controller.dto.WorkoutDetailsDTO;
 import com.willcb.fitnesstrackerbackend.model.Workout;
+import com.willcb.fitnesstrackerbackend.service.WorkoutPlanService;
 import com.willcb.fitnesstrackerbackend.service.WorkoutService;
 
 
@@ -37,6 +40,21 @@ public class WorkoutController {
             return ResponseEntity.ok(workout);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/{id}/exercises")
+    public ResponseEntity<List<ExerciseDetailsDTO>> getExercisesByWorkoutId(@PathVariable Long id) {
+        try {
+            List<ExerciseDetailsDTO> exerciseDetailsList = WorkoutService.getExerciseDetailsByWorkoutID(id);
+
+            if (!exerciseDetailsList.isEmpty()) {
+                return ResponseEntity.ok(exerciseDetailsList);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
         } catch (NoSuchElementException e) {
             return ResponseEntity.notFound().build();
         }
