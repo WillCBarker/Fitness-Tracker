@@ -12,15 +12,26 @@ public class User {
     private Long id;
 
     private String name;
-    private int age = 0;
-    private double weight = 0.0;
-    private double height = 0.0;
+    private int age;
+    private double weight;
+    private double height;
     private String gender;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private WorkoutPlan workoutPlan;
 
     public User() {
+        this.age = 0;
+        this.height = 0.0;
+        this.weight = 0.0;
+    }
+
+    public User(String name, Integer age, Double height, Double weight, String gender) {
+        this.name = name;
+        this.age = age;
+        this.height = height;
+        this.weight = weight;
+        this.gender = gender;
     }
 
     // Getters
