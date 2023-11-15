@@ -20,12 +20,6 @@ public class User {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private WorkoutPlan workoutPlan;
 
-    public User() {
-        this.age = 0;
-        this.height = 0.0;
-        this.weight = 0.0;
-    }
-
     public User(String name, Integer age, Double height, Double weight, String gender) {
         this.name = name;
         this.age = age;
