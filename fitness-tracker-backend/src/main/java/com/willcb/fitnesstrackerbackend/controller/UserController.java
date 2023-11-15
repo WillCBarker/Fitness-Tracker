@@ -48,6 +48,7 @@ public class UserController {
     
     @GetMapping("/{id}/workoutplan")
     public ResponseEntity<WorkoutPlan> getWorkoutPlanByUserID(@PathVariable Long id) {
+        
         try {
             User user = UserService.getUserByID(id);
             WorkoutPlan workoutPlan = user.getWorkoutPlan();
