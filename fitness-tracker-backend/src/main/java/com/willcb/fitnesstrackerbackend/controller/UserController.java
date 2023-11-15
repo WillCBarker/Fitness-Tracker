@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import com.willcb.fitnesstrackerbackend.model.User;
+import com.willcb.fitnesstrackerbackend.model.WorkoutPlan;
 import com.willcb.fitnesstrackerbackend.service.UserService;
 
 
@@ -38,6 +39,19 @@ public class UserController {
         try {
             User user = UserService.getUserByID(id);
             return ResponseEntity.ok(user);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().build();
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    
+    @GetMapping("/{id}/workoutplan")
+    public ResponseEntity<WorkoutPlan> getWorkoutPlanByUserID(@PathVariable Long id) {
+        try {
+            User user = UserService.getUserByID(id);
+            WorkoutPlan workoutPlan = user.getWorkoutPlan();
+            return ResponseEntity.ok(workoutPlan);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
         } catch (NoSuchElementException e) {

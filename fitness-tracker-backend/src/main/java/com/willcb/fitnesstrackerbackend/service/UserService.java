@@ -2,6 +2,7 @@ package com.willcb.fitnesstrackerbackend.service;
 
 import com.willcb.fitnesstrackerbackend.repository.UserRepository;
 import com.willcb.fitnesstrackerbackend.model.User;
+import com.willcb.fitnesstrackerbackend.model.WorkoutPlan;
 
 import java.util.NoSuchElementException;
 
@@ -22,8 +23,13 @@ public class UserService {
         }
     }
 
-    public User getUserByID(Long userID){
+    public User getUserByID(Long userID) {
         return userRepository.findById(userID).orElse(null);
+    }
+
+    public WorkoutPlan getWorkoutPlanByUserID(Long userID){
+        User user = userRepository.findById(userID).orElseThrow(() -> new NoSuchElementException("User not found"));
+        return user.getWorkoutPlan();
     }
 
     public List<User> getAllUsers() {
@@ -38,10 +44,7 @@ public class UserService {
 
     public User updateUser(Long id, User updatedUser) {
         validateUser(updatedUser);
-
-        User existingUser = userRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("User not found"));
-
+        User existingUser = userRepository.findById(id).orElseThrow(() -> new NoSuchElementException("User not found"));
         return userRepository.save(existingUser);
     }
 

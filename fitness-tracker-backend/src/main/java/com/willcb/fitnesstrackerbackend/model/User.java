@@ -86,5 +86,9 @@ public class User {
 
     public void setWorkoutPlan(WorkoutPlan workoutPlan) {
         this.workoutPlan = workoutPlan;
+        
+        if (workoutPlan != null) {
+            workoutPlan.setUser(this);
+        }
     }
 }
