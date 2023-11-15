@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.willcb.fitnesstrackerbackend.controller.dto.WorkoutDetailsDTO;
 import com.willcb.fitnesstrackerbackend.model.WorkoutPlan;
 import com.willcb.fitnesstrackerbackend.service.WorkoutPlanService;
 
@@ -40,6 +41,21 @@ public class WorkoutPlanController {
             return ResponseEntity.ok(workoutPlan);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/{id}/workouts")
+    public ResponseEntity<List<WorkoutDetailsDTO>> getWorkoutsByPlanId(@PathVariable Long id) {
+        try {
+            List<WorkoutDetailsDTO> workoutDetailsList = WorkoutPlanService.getWorkoutsDetailsByPlanId(id);
+
+            if (!workoutDetailsList.isEmpty()) {
+                return ResponseEntity.ok(workoutDetailsList);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
         } catch (NoSuchElementException e) {
             return ResponseEntity.notFound().build();
         }
