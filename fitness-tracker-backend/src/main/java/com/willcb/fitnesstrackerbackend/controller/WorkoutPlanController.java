@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.willcb.fitnesstrackerbackend.controller.dto.WorkoutDetailsDTO;
+import com.willcb.fitnesstrackerbackend.dto.WorkoutDetailsDTO;
 import com.willcb.fitnesstrackerbackend.model.WorkoutPlan;
 import com.willcb.fitnesstrackerbackend.service.WorkoutPlanService;
 

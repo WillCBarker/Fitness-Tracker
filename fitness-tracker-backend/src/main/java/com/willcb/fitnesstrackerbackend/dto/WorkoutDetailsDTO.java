@@ -1,4 +1,4 @@
-package com.willcb.fitnesstrackerbackend.controller.dto;
+package com.willcb.fitnesstrackerbackend.dto;
 
 import java.time.DayOfWeek;
 
