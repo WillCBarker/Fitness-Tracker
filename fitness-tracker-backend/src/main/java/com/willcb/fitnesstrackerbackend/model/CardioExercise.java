@@ -10,9 +10,11 @@ public class CardioExercise extends Exercise {
     private int duration;
     private double distance;
 
-    public CardioExercise() {
+    public CardioExercise(int duration, double distance) {
+        this.duration = duration;
+        this.distance = distance;
     }
-
+    
     // Getters
 
     public int getDuration() {

@@ -11,8 +11,12 @@ public class ResistanceExercise extends Exercise {
     private int reps;
     private double weight;
 
-    public ResistanceExercise() {
+    public ResistanceExercise(int sets, int reps, double weight) {
+        this.sets = sets;
+        this.reps = reps;
+        this.weight = weight;
     }
+    
 
     // Getters
 
