@@ -1,4 +1,4 @@
-package com.willcb.fitnesstrackerbackend.controller;
+package com.willcb.fitnesstrackerbackend.controllers;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -15,29 +15,30 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.willcb.fitnesstrackerbackend.dto.ExerciseDetailsDTO;
-import com.willcb.fitnesstrackerbackend.model.Workout;
-import com.willcb.fitnesstrackerbackend.service.WorkoutService;
+import com.willcb.fitnesstrackerbackend.dto.WorkoutDetailsDTO;
+import com.willcb.fitnesstrackerbackend.entities.WorkoutPlan;
+import com.willcb.fitnesstrackerbackend.services.WorkoutPlanService;
 
 
 @RestController
-@RequestMapping("/workouts")
-public class WorkoutController {
+@RequestMapping("/workoutplans")
+public class WorkoutPlanController {
+    
     @Autowired
-    private WorkoutService WorkoutService;
+    private WorkoutPlanService workoutPlanService;
 
     @GetMapping
-    public List<Workout> getAllWorkouts() {
+    public List<WorkoutPlan> getAllWorkoutPlans() {
         // need service method
-        return WorkoutService.getAllWorkouts();
+        return workoutPlanService.getAllWorkoutPlans();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Workout> getWorkoutByID(@PathVariable Long id) {
+    public ResponseEntity<WorkoutPlan> getWorkoutPlanByID(@PathVariable Long id) {
 
         try {
-            Workout workout = WorkoutService.getWorkoutByID(id);
-            return ResponseEntity.ok(workout);
+            WorkoutPlan workoutPlan = workoutPlanService.getWorkoutPlanByID(id);
+            return ResponseEntity.ok(workoutPlan);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
         } catch (NoSuchElementException e) {
@@ -45,13 +46,13 @@ public class WorkoutController {
         }
     }
 
-    @GetMapping("/{id}/exercises")
-    public ResponseEntity<List<ExerciseDetailsDTO>> getExercisesByWorkoutId(@PathVariable Long id) {
+    @GetMapping("/{id}/workouts")
+    public ResponseEntity<List<WorkoutDetailsDTO>> getWorkoutsByPlanId(@PathVariable Long id) {
         try {
-            List<ExerciseDetailsDTO> exerciseDetailsList = WorkoutService.getExerciseDetailsByWorkoutID(id);
+            List<WorkoutDetailsDTO> workoutDetailsList = workoutPlanService.getWorkoutsDetailsByPlanId(id);
 
-            if (!exerciseDetailsList.isEmpty()) {
-                return ResponseEntity.ok(exerciseDetailsList);
+            if (!workoutDetailsList.isEmpty()) {
+                return ResponseEntity.ok(workoutDetailsList);
             } else {
                 return ResponseEntity.notFound().build();
             }
@@ -61,22 +62,22 @@ public class WorkoutController {
     }
 
     @PostMapping
-    public ResponseEntity<Workout> createWorkout(@RequestBody Workout workout) {
+    public ResponseEntity<WorkoutPlan> createWorkoutPlan(@RequestBody WorkoutPlan workoutPlan) {
 
         try {
-            Workout createdWorkout = WorkoutService.createWorkout(workout);
-            return ResponseEntity.status(HttpStatus.CREATED).body(createdWorkout);
+            WorkoutPlan createdWorkoutPlan = workoutPlanService.createWorkoutPlan(workoutPlan);
+            return ResponseEntity.status(HttpStatus.CREATED).body(createdWorkoutPlan);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Workout> updateWorkout(@PathVariable Long id, @RequestBody Workout updatedWorkout) {
+    public ResponseEntity<WorkoutPlan> updateWorkoutPlan(@PathVariable Long id, @RequestBody WorkoutPlan updatedWorkoutPlan) {
 
         try {
-            Workout workout = WorkoutService.updateWorkout(id, updatedWorkout);
-            return ResponseEntity.ok(workout);
+            WorkoutPlan workoutPlan = workoutPlanService.updateWorkoutPlan(id, updatedWorkoutPlan);
+            return ResponseEntity.ok(workoutPlan);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
         } catch (NoSuchElementException e) {
@@ -85,8 +86,8 @@ public class WorkoutController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteWorkout(@PathVariable Long id) {
-        boolean deleted = WorkoutService.deleteWorkout(id);
+    public ResponseEntity<Void> deleteWorkoutPlan(@PathVariable Long id) {
+        boolean deleted = workoutPlanService.deleteWorkoutPlan(id);
 
         if (deleted) {
             return ResponseEntity.noContent().build();

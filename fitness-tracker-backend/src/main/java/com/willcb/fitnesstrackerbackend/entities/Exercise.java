@@ -1,7 +1,6 @@
-package com.willcb.fitnesstrackerbackend.model;
+package com.willcb.fitnesstrackerbackend.entities;
 
-import javax.persistence.*;
-
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "exercise")
@@ -13,26 +12,32 @@ public class Exercise {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
+    @ManyToOne
+    @JoinColumn(name = "workout_id")  // Adjust the column name if needed
+    private Workout workout;
+
+
     private String name;
 
     public Exercise() {
     }
 
+    public Exercise(String name) {
+        this.name = name;
+    }
+
     // Getters
 
     public Long getId() {
-        return id;
+        return this.id;
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     // Setters
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public void setName(String name) {
         this.name = name;

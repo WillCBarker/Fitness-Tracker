@@ -2,7 +2,7 @@ package com.willcb.fitnesstrackerbackend.dto;
 
 import java.time.DayOfWeek;
 
-import com.willcb.fitnesstrackerbackend.model.Workout;
+import com.willcb.fitnesstrackerbackend.entities.Workout;
 
 public class WorkoutDetailsDTO {
 

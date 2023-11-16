@@ -1,6 +1,6 @@
-package com.willcb.fitnesstrackerbackend.model;
+package com.willcb.fitnesstrackerbackend.entities;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.*;
 import java.time.*;
 
@@ -26,6 +26,11 @@ public class WorkoutPlan {
     private Map<DayOfWeek, Workout> dayWorkoutMapping;
 
     public WorkoutPlan() {
+    }
+
+    public WorkoutPlan(User user, String name) {
+        this.user = user;
+        this.name = name;
     }
 
     // Getters

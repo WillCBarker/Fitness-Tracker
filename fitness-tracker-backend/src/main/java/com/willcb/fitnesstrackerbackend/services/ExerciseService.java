@@ -1,7 +1,7 @@
-package com.willcb.fitnesstrackerbackend.service;
+package com.willcb.fitnesstrackerbackend.services;
 
-import com.willcb.fitnesstrackerbackend.model.Exercise;
-import com.willcb.fitnesstrackerbackend.repository.ExerciseRepository;
+import com.willcb.fitnesstrackerbackend.entities.Exercise;
+import com.willcb.fitnesstrackerbackend.repositories.ExerciseRepository;
 
 import java.util.*;
 import java.util.NoSuchElementException;
@@ -15,7 +15,7 @@ public class ExerciseService {
     @Autowired
     private ExerciseRepository ExerciseRepository;
 
-        private void validateExercise(Exercise exercise) {
+    private void validateExercise(Exercise exercise) {
         // Validate exercise input
         if (exercise == null || exercise.getName() == null) {
             throw new IllegalArgumentException("Exercise details are incomplete");

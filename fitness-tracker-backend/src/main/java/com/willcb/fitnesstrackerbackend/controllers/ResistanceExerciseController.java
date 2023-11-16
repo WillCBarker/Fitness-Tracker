@@ -1,4 +1,4 @@
-package com.willcb.fitnesstrackerbackend.controller;
+package com.willcb.fitnesstrackerbackend.controllers;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.willcb.fitnesstrackerbackend.model.ResistanceExercise;
-import com.willcb.fitnesstrackerbackend.service.ResistanceExerciseService;
+import com.willcb.fitnesstrackerbackend.entities.ResistanceExercise;
+import com.willcb.fitnesstrackerbackend.services.ResistanceExerciseService;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -24,19 +24,19 @@ import org.springframework.http.ResponseEntity;
 public class ResistanceExerciseController {
 
     @Autowired
-    private ResistanceExerciseService ResistanceExerciseService;
+    private ResistanceExerciseService resistanceExerciseService;
 
     @GetMapping
     public List<ResistanceExercise> getAllResistanceExercises() {
         // need service method
-        return ResistanceExerciseService.getAllResistanceExercises();
+        return resistanceExerciseService.getAllResistanceExercises();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ResistanceExercise> getResistanceExerciseByID(@PathVariable Long id) {
 
         try {
-            ResistanceExercise resistanceExercise = ResistanceExerciseService.getResistanceExerciseByID(id);
+            ResistanceExercise resistanceExercise = resistanceExerciseService.getResistanceExerciseByID(id);
             return ResponseEntity.ok(resistanceExercise);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
@@ -50,7 +50,7 @@ public class ResistanceExerciseController {
     public ResponseEntity<ResistanceExercise> createResistanceExercise(@RequestBody ResistanceExercise resistanceExercise) {
 
         try {
-            ResistanceExercise createdResistanceExercise = ResistanceExerciseService.createResistanceExercise(resistanceExercise);
+            ResistanceExercise createdResistanceExercise = resistanceExerciseService.createResistanceExercise(resistanceExercise);
             return ResponseEntity.status(HttpStatus.CREATED).body(createdResistanceExercise);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
@@ -61,7 +61,7 @@ public class ResistanceExerciseController {
     public ResponseEntity<ResistanceExercise> updateResistanceExercise(@PathVariable Long id, @RequestBody ResistanceExercise updatedResistanceExercise) {
 
         try {
-            ResistanceExercise resistanceExercise = ResistanceExerciseService.updateResistanceExercise(id, updatedResistanceExercise);
+            ResistanceExercise resistanceExercise = resistanceExerciseService.updateResistanceExercise(id, updatedResistanceExercise);
             return ResponseEntity.ok(resistanceExercise);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
@@ -72,7 +72,7 @@ public class ResistanceExerciseController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteResistanceExercise(@PathVariable Long id) {
-        boolean deleted = ResistanceExerciseService.deleteResistanceExercise(id);
+        boolean deleted = resistanceExerciseService.deleteResistanceExercise(id);
 
         if (deleted) {
             return ResponseEntity.noContent().build();

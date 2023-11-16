@@ -1,7 +1,6 @@
-package com.willcb.fitnesstrackerbackend.model;
+package com.willcb.fitnesstrackerbackend.entities;
 
-import javax.persistence.*;
-
+import jakarta.persistence.*;
 
 @Entity
 @DiscriminatorValue("CARDIO")
@@ -9,6 +8,9 @@ public class CardioExercise extends Exercise {
 
     private int duration;
     private double distance;
+
+    public CardioExercise() {
+    }
 
     public CardioExercise(int duration, double distance) {
         this.duration = duration;
@@ -18,11 +20,11 @@ public class CardioExercise extends Exercise {
     // Getters
 
     public int getDuration() {
-        return duration;
+        return this.duration;
     }
 
     public double getDistance() {
-        return distance;
+        return this.distance;
     }
 
     // Setters

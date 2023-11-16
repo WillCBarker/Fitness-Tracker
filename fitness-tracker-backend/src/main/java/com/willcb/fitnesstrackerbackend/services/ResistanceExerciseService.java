@@ -1,8 +1,7 @@
-package com.willcb.fitnesstrackerbackend.service;
+package com.willcb.fitnesstrackerbackend.services;
 
-import com.willcb.fitnesstrackerbackend.model.ResistanceExercise;
-import com.willcb.fitnesstrackerbackend.repository.ResistanceExerciseRepository;
-import com.willcb.fitnesstrackerbackend.repository.ResistanceExerciseRepository;
+import com.willcb.fitnesstrackerbackend.entities.ResistanceExercise;
+import com.willcb.fitnesstrackerbackend.repositories.ResistanceExerciseRepository;
 
 import java.util.List;
 import java.util.NoSuchElementException;

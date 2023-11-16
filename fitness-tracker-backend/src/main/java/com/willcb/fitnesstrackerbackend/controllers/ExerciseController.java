@@ -1,4 +1,4 @@
-package com.willcb.fitnesstrackerbackend.controller;
+package com.willcb.fitnesstrackerbackend.controllers;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.willcb.fitnesstrackerbackend.model.Exercise;
-import com.willcb.fitnesstrackerbackend.service.ExerciseService;
+import com.willcb.fitnesstrackerbackend.entities.Exercise;
+import com.willcb.fitnesstrackerbackend.services.ExerciseService;
 
 
 @RestController
@@ -24,19 +24,19 @@ import com.willcb.fitnesstrackerbackend.service.ExerciseService;
 public class ExerciseController {
 
     @Autowired
-    private ExerciseService ExerciseService;
+    private ExerciseService exerciseService;
 
     @GetMapping
     public List<Exercise> getAllExercises() {
         // need service method
-        return ExerciseService.getAllExercises();
+        return exerciseService.getAllExercises();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Exercise> getExerciseByID(@PathVariable Long id) {
 
         try {
-            Exercise exercise = ExerciseService.getExerciseByID(id);
+            Exercise exercise = exerciseService.getExerciseByID(id);
             return ResponseEntity.ok(exercise);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
@@ -49,7 +49,7 @@ public class ExerciseController {
     public ResponseEntity<Exercise> createExercise(@RequestBody Exercise exercise) {
 
         try {
-            Exercise createdExercise = ExerciseService.createExercise(exercise);
+            Exercise createdExercise = exerciseService.createExercise(exercise);
             return ResponseEntity.status(HttpStatus.CREATED).body(createdExercise);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
@@ -60,7 +60,7 @@ public class ExerciseController {
     public ResponseEntity<Exercise> updateExercise(@PathVariable Long id, @RequestBody Exercise updatedExercise) {
 
         try {
-            Exercise exercise = ExerciseService.updateExercise(id, updatedExercise);
+            Exercise exercise = exerciseService.updateExercise(id, updatedExercise);
             return ResponseEntity.ok(exercise);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
@@ -71,7 +71,7 @@ public class ExerciseController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteExercise(@PathVariable Long id) {
-        boolean deleted = ExerciseService.deleteExercise(id);
+        boolean deleted = exerciseService.deleteExercise(id);
 
         if (deleted) {
             return ResponseEntity.noContent().build();

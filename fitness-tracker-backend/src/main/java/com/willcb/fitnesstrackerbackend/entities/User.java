@@ -1,7 +1,6 @@
-package com.willcb.fitnesstrackerbackend.model;
+package com.willcb.fitnesstrackerbackend.entities;
 
-import javax.persistence.*;
-
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "user")
@@ -20,6 +19,9 @@ public class User {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private WorkoutPlan workoutPlan;
 
+    public User() {
+    }
+
     public User(String name, Integer age, Double height, Double weight, String gender) {
         this.name = name;
         this.age = age;
@@ -31,38 +33,34 @@ public class User {
     // Getters
 
     public Long getId() {
-        return id;
+        return this.id;
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public int getAge() {
-        return age;
+        return this.age;
     }
 
     public double getWeight() {
-        return weight;
+        return this.weight;
     }
 
     public double getHeight() {
-        return height;
+        return this.height;
     }
 
     public String getGender() {
-        return gender;
+        return this.gender;
     }
 
     public WorkoutPlan getWorkoutPlan() {
-        return workoutPlan;
+        return this.workoutPlan;
     }
 
     // Setters
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public void setName(String name) {
         this.name = name;

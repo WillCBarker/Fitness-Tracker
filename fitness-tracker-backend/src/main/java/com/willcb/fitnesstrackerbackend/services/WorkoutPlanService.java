@@ -1,10 +1,10 @@
-package com.willcb.fitnesstrackerbackend.service;
+package com.willcb.fitnesstrackerbackend.services;
 
-import com.willcb.fitnesstrackerbackend.model.WorkoutPlan;
-import com.willcb.fitnesstrackerbackend.repository.WorkoutPlanRepository;
+import com.willcb.fitnesstrackerbackend.repositories.WorkoutPlanRepository;
 import com.willcb.fitnesstrackerbackend.dto.WorkoutDetailsDTO;
-import com.willcb.fitnesstrackerbackend.model.User;
-import com.willcb.fitnesstrackerbackend.model.Workout;
+import com.willcb.fitnesstrackerbackend.entities.User;
+import com.willcb.fitnesstrackerbackend.entities.Workout;
+import com.willcb.fitnesstrackerbackend.entities.WorkoutPlan;
 
 import java.time.DayOfWeek;
 import java.util.ArrayList;

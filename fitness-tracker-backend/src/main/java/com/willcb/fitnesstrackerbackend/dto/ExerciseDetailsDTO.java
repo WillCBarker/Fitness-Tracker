@@ -1,7 +1,7 @@
 package com.willcb.fitnesstrackerbackend.dto;
 
 
-import com.willcb.fitnesstrackerbackend.model.Exercise;
+import com.willcb.fitnesstrackerbackend.entities.Exercise;
 
 public class ExerciseDetailsDTO {
     

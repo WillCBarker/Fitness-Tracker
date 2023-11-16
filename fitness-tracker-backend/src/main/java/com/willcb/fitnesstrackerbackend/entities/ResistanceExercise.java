@@ -1,7 +1,6 @@
-package com.willcb.fitnesstrackerbackend.model;
+package com.willcb.fitnesstrackerbackend.entities;
 
-import javax.persistence.*;
-
+import jakarta.persistence.*;
 
 @Entity
 @DiscriminatorValue("RESISTANCE")
@@ -10,6 +9,9 @@ public class ResistanceExercise extends Exercise {
     private int sets;
     private int reps;
     private double weight;
+
+    public ResistanceExercise() {
+    }
 
     public ResistanceExercise(int sets, int reps, double weight) {
         this.sets = sets;
@@ -21,15 +23,15 @@ public class ResistanceExercise extends Exercise {
     // Getters
 
     public int getSets() {
-        return sets;
+        return this.sets;
     }
 
     public int getReps() {
-        return reps;
+        return this.reps;
     }
 
     public double getWeight() {
-        return weight;
+        return this.weight;
     }
 
     // Setters

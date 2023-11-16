@@ -1,9 +1,7 @@
-package com.willcb.fitnesstrackerbackend.service;
+package com.willcb.fitnesstrackerbackend.services;
 
-import com.willcb.fitnesstrackerbackend.model.CardioExercise;
-import com.willcb.fitnesstrackerbackend.model.WorkoutPlan;
-import com.willcb.fitnesstrackerbackend.repository.CardioExerciseRepository;
-import com.willcb.fitnesstrackerbackend.repository.CardioExerciseRepository;
+import com.willcb.fitnesstrackerbackend.entities.CardioExercise;
+import com.willcb.fitnesstrackerbackend.repositories.CardioExerciseRepository;
 
 import java.util.List;
 import java.util.NoSuchElementException;

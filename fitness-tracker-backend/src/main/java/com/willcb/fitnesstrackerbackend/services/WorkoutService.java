@@ -1,9 +1,9 @@
-package com.willcb.fitnesstrackerbackend.service;
+package com.willcb.fitnesstrackerbackend.services;
 
 import com.willcb.fitnesstrackerbackend.dto.ExerciseDetailsDTO;
-import com.willcb.fitnesstrackerbackend.model.Exercise;
-import com.willcb.fitnesstrackerbackend.model.Workout;
-import com.willcb.fitnesstrackerbackend.repository.WorkoutRepository;
+import com.willcb.fitnesstrackerbackend.entities.Exercise;
+import com.willcb.fitnesstrackerbackend.entities.Workout;
+import com.willcb.fitnesstrackerbackend.repositories.WorkoutRepository;
 
 import java.util.*;
 

@@ -1,8 +1,8 @@
-package com.willcb.fitnesstrackerbackend.model;
+package com.willcb.fitnesstrackerbackend.entities;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+
 import java.util.List;
-
 
 @Entity
 @Table(name = "workout")
@@ -18,35 +18,37 @@ public class Workout {
 
     private String label;
 
-    @OneToMany(mappedBy = "workout", cascade = CascadeType.ALL)
+        @OneToMany(mappedBy = "workout", cascade = CascadeType.ALL)
     private List<Exercise> exercises;
 
     public Workout() {
     }
 
+    public Workout(WorkoutPlan workoutPlan, String label, List<Exercise> exercises) {
+        this.workoutPlan = workoutPlan;
+        this.label = label;
+        this.exercises = exercises;
+    }
+
     // Getters
 
     public Long getId() {
-        return id;
+        return this.id;
     }
 
     public WorkoutPlan getWorkoutPlan() {
-        return workoutPlan;
+        return this.workoutPlan;
     }
 
     public String getLabel() {
-        return label;
+        return this.label;
     }
 
     public List<Exercise> getExercises() {
-        return exercises;
+        return this.exercises;
     }
 
     // Setters
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public void setWorkoutPlan(WorkoutPlan workoutPlan) {
         this.workoutPlan = workoutPlan;

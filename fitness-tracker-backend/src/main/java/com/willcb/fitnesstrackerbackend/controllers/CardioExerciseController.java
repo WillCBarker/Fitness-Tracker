@@ -1,4 +1,4 @@
-package com.willcb.fitnesstrackerbackend.controller;
+package com.willcb.fitnesstrackerbackend.controllers;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -15,9 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.willcb.fitnesstrackerbackend.model.CardioExercise;
-import com.willcb.fitnesstrackerbackend.model.WorkoutPlan;
-import com.willcb.fitnesstrackerbackend.service.CardioExerciseService;
+import com.willcb.fitnesstrackerbackend.entities.CardioExercise;
+import com.willcb.fitnesstrackerbackend.services.CardioExerciseService;
 
 
 @RestController
@@ -25,19 +24,19 @@ import com.willcb.fitnesstrackerbackend.service.CardioExerciseService;
 public class CardioExerciseController {
 
     @Autowired
-    private CardioExerciseService CardioExerciseService;
+    private CardioExerciseService cardioExerciseService;
 
     @GetMapping
     public List<CardioExercise> getAllCardioExercises() {
         // need service method
-        return CardioExerciseService.getAllCardioExercises();
+        return cardioExerciseService.getAllCardioExercises();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<CardioExercise> getCardioExerciseByID(@PathVariable Long id) {
 
         try {
-            CardioExercise cardioExercise = CardioExerciseService.getCardioExerciseByID(id);
+            CardioExercise cardioExercise = cardioExerciseService.getCardioExerciseByID(id);
             return ResponseEntity.ok(cardioExercise);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
@@ -51,7 +50,7 @@ public class CardioExerciseController {
     public ResponseEntity<CardioExercise> createCardioExercise(@RequestBody CardioExercise cardioExercise) {
 
         try {
-            CardioExercise createdCardioExercise = CardioExerciseService.createCardioExercise(cardioExercise);
+            CardioExercise createdCardioExercise = cardioExerciseService.createCardioExercise(cardioExercise);
             return ResponseEntity.status(HttpStatus.CREATED).body(createdCardioExercise);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
@@ -62,7 +61,7 @@ public class CardioExerciseController {
     public ResponseEntity<CardioExercise> updateCardioExercise(@PathVariable Long id, @RequestBody CardioExercise updatedCardioExercise) {
 
         try {
-            CardioExercise cardioExercise = CardioExerciseService.updateCardioExercise(id, updatedCardioExercise);
+            CardioExercise cardioExercise = cardioExerciseService.updateCardioExercise(id, updatedCardioExercise);
             return ResponseEntity.ok(cardioExercise);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
@@ -73,7 +72,7 @@ public class CardioExerciseController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCardioExercise(@PathVariable Long id) {
-        boolean deleted = CardioExerciseService.deleteCardioExercise(id);
+        boolean deleted = cardioExerciseService.deleteCardioExercise(id);
 
         if (deleted) {
             return ResponseEntity.noContent().build();
