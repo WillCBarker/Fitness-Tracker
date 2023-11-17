@@ -26,3 +26,7 @@ This is the backend component of the Fitness Tracker project. It provides RESTfu
 4. **Run the Project**
    - Navigate to the root directory of the project
    - Run the project ```mvn spring-boot:run```
+
+## Endpoints
+
+- After running the server, visit endpoint documentation at: ```http://localhost:8080/swagger-ui/index.html```
