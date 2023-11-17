@@ -13,8 +13,8 @@ public class WorkoutPlan {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "person_id")
+    private Person person;
 
     @Column(nullable = false)
     private String name;
@@ -28,8 +28,8 @@ public class WorkoutPlan {
     public WorkoutPlan() {
     }
 
-    public WorkoutPlan(User user, String name) {
-        this.user = user;
+    public WorkoutPlan(Person person, String name) {
+        this.person = person;
         this.name = name;
     }
 
@@ -39,8 +39,8 @@ public class WorkoutPlan {
         return id;
     }
 
-    public User getUser() {
-        return user;
+    public Person getPerson() {
+        return person;
     }
 
     public String getName() {
@@ -57,8 +57,8 @@ public class WorkoutPlan {
         this.id = id;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
     public void setName(String name) {

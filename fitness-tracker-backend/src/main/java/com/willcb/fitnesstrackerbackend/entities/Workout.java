@@ -18,7 +18,7 @@ public class Workout {
 
     private String label;
 
-        @OneToMany(mappedBy = "workout", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "workout", cascade = CascadeType.ALL)
     private List<Exercise> exercises;
 
     public Workout() {

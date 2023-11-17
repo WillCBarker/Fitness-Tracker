@@ -3,8 +3,8 @@ package com.willcb.fitnesstrackerbackend.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "user")
-public class User {
+@Table(name = "person")
+public class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,13 +16,13 @@ public class User {
     private double height;
     private String gender;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "person", cascade = CascadeType.ALL)
     private WorkoutPlan workoutPlan;
 
-    public User() {
+    public Person() {
     }
 
-    public User(String name, Integer age, Double height, Double weight, String gender) {
+    public Person(String name, Integer age, Double height, Double weight, String gender) {
         this.name = name;
         this.age = age;
         this.height = height;
@@ -86,7 +86,7 @@ public class User {
         this.workoutPlan = workoutPlan;
         
         if (workoutPlan != null) {
-            workoutPlan.setUser(this);
+            workoutPlan.setPerson(this);
         }
     }
 }

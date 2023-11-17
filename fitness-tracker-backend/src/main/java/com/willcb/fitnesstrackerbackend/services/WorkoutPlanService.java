@@ -2,7 +2,7 @@ package com.willcb.fitnesstrackerbackend.services;
 
 import com.willcb.fitnesstrackerbackend.repositories.WorkoutPlanRepository;
 import com.willcb.fitnesstrackerbackend.dto.WorkoutDetailsDTO;
-import com.willcb.fitnesstrackerbackend.entities.User;
+import com.willcb.fitnesstrackerbackend.entities.Person;
 import com.willcb.fitnesstrackerbackend.entities.Workout;
 import com.willcb.fitnesstrackerbackend.entities.WorkoutPlan;
 
@@ -23,7 +23,7 @@ public class WorkoutPlanService {
 
     private void validateWorkoutPlan(WorkoutPlan workoutPlan) {
         // Validate workoutPlan input
-        if (workoutPlan == null || workoutPlan.getUser() == null || workoutPlan.getName() == null) {
+        if (workoutPlan == null || workoutPlan.getPerson() == null || workoutPlan.getName() == null) {
             throw new IllegalArgumentException("WorkoutPlan details are incomplete");
         }
     }
@@ -46,8 +46,8 @@ public class WorkoutPlanService {
         return workoutDetailsList;
     }
 
-    public List<WorkoutPlan> getWorkoutPlanByUser(User user) {
-        return WorkoutPlanRepository.findByUser(user);
+    public List<WorkoutPlan> getWorkoutPlanByPerson(Person person) {
+        return WorkoutPlanRepository.findByPerson(person);
     }
 
     public WorkoutPlan getWorkoutPlanByID(Long workoutPlanID){

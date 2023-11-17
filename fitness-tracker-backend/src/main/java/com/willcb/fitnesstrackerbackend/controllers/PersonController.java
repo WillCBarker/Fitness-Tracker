@@ -14,30 +14,30 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import com.willcb.fitnesstrackerbackend.entities.User;
+import com.willcb.fitnesstrackerbackend.entities.Person;
 import com.willcb.fitnesstrackerbackend.entities.WorkoutPlan;
-import com.willcb.fitnesstrackerbackend.services.UserService;
+import com.willcb.fitnesstrackerbackend.services.PersonService;
 
 
 @RestController
-@RequestMapping("/users")
-public class UserController {
+@RequestMapping("/persons")
+public class PersonController {
     
     @Autowired
-    private UserService userService;
+    private PersonService personService;
 
     @GetMapping
-    public List<User> getAllUsers() {
+    public List<Person> getAllPersons() {
         // need service method
-        return userService.getAllUsers();
+        return personService.getAllPersons();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserByID(@PathVariable Long id) {
+    public ResponseEntity<Person> getPersonByID(@PathVariable Long id) {
 
         try {
-            User user = userService.getUserByID(id);
-            return ResponseEntity.ok(user);
+            Person person = personService.getPersonByID(id);
+            return ResponseEntity.ok(person);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
         } catch (NoSuchElementException e) {
@@ -46,11 +46,11 @@ public class UserController {
     }
     
     @GetMapping("/{id}/workoutplan")
-    public ResponseEntity<WorkoutPlan> getWorkoutPlanByUserID(@PathVariable Long id) {
+    public ResponseEntity<WorkoutPlan> getWorkoutPlanByPersonID(@PathVariable Long id) {
         
         try {
-            User user = userService.getUserByID(id);
-            WorkoutPlan workoutPlan = user.getWorkoutPlan();
+            Person person = personService.getPersonByID(id);
+            WorkoutPlan workoutPlan = person.getWorkoutPlan();
             return ResponseEntity.ok(workoutPlan);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
@@ -60,22 +60,22 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user) {
+    public ResponseEntity<Person> createPerson(@RequestBody Person person) {
 
         try {
-            User createdUser = userService.createUser(user);
-            return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
+            Person createdPerson = personService.createPerson(person);
+            return ResponseEntity.status(HttpStatus.CREATED).body(createdPerson);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
+    public ResponseEntity<Person> updatePerson(@PathVariable Long id, @RequestBody Person updatedPerson) {
 
         try {
-            User user = userService.updateUser(id, updatedUser);
-            return ResponseEntity.ok(user);
+            Person person = personService.updatePerson(id, updatedPerson);
+            return ResponseEntity.ok(person);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
         } catch (NoSuchElementException e) {
@@ -84,8 +84,8 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
-        boolean deleted = userService.deleteUser(id);
+    public ResponseEntity<Void> deletePerson(@PathVariable Long id) {
+        boolean deleted = personService.deletePerson(id);
 
         if (deleted) {
             return ResponseEntity.noContent().build();
