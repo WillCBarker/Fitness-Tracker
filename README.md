@@ -29,4 +29,4 @@ This is the backend component of the Fitness Tracker project. It provides RESTfu
 
 ## Endpoints
 
-- After running the server, visit endpoint documentation at: ```http://localhost:8080/swagger-ui/index.html```
+- After running the server, view endpoint documentation at: ```http://localhost:8080/swagger-ui/index.html```
