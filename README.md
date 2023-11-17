@@ -4,10 +4,10 @@ This is the backend component of the Fitness Tracker project. It provides RESTfu
 
 ## Technologies Used
 
-- **Spring Boot:**
-- **Spring Data JPA:**
-- **Hibernate:**
-- **PostgreSQL:**
+- **Spring Boot**
+- **Spring Data JPA**
+- **Hibernate**
+- **PostgreSQL**
 
 ## Getting Started
 
