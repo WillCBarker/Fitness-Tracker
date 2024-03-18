@@ -12,8 +12,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class ExerciseService {
 
+    private ExerciseRepository exerciseRepository;
+
     @Autowired
-    private ExerciseRepository ExerciseRepository;
+    public ExerciseService(ExerciseRepository exerciseRepository) {
+        this.exerciseRepository = exerciseRepository;
+    }
 
     private void validateExercise(Exercise exercise) {
         // Validate exercise input
@@ -23,31 +27,31 @@ public class ExerciseService {
     }
 
     public Exercise getExerciseByID(Long exerciseID){
-        return ExerciseRepository.findById(exerciseID).orElse(null);
+        return this.exerciseRepository.findById(exerciseID).orElse(null);
     }
 
     public List<Exercise> getAllExercises() {
-        return ExerciseRepository.findAll();
+        return this.exerciseRepository.findAll();
     }
 
     public Exercise createExercise(Exercise exercise) {
         validateExercise(exercise);
 
-        return ExerciseRepository.save(exercise);
+        return exerciseRepository.save(exercise);
     }
 
     public Exercise updateExercise(Long id, Exercise updatedExercise) {
         validateExercise(updatedExercise);
 
-        Exercise existingExercise = ExerciseRepository.findById(id)
+        Exercise existingExercise = this.exerciseRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Exercise not found"));
 
-        return ExerciseRepository.save(existingExercise);
+        return this.exerciseRepository.save(existingExercise);
     }
 
     public boolean deleteExercise(Long id) {
-        if (ExerciseRepository.existsById(id)) {
-            ExerciseRepository.deleteById(id);
+        if (this.exerciseRepository.existsById(id)) {
+            this.exerciseRepository.deleteById(id);
             return true;
         } else {
             return false;
