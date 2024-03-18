@@ -17,9 +17,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class WorkoutPlanService {
 
-    @Autowired
-    private WorkoutPlanRepository WorkoutPlanRepository;
+    private final WorkoutPlanRepository workoutPlanRepository;
 
+    @Autowired
+    public WorkoutPlanService(WorkoutPlanRepository workoutPlanRepository) {
+        this.workoutPlanRepository = workoutPlanRepository;
+    }
 
     private void validateWorkoutPlan(WorkoutPlan workoutPlan) {
         // Validate workoutPlan input
@@ -29,7 +32,7 @@ public class WorkoutPlanService {
     }
 
     public List<WorkoutDetailsDTO> getWorkoutsDetailsByPlanId(Long workoutPlanID) {
-        WorkoutPlan workoutPlan = WorkoutPlanRepository.findById(workoutPlanID).orElseThrow(() -> new NoSuchElementException("WorkoutPlan not found"));
+        WorkoutPlan workoutPlan = this.workoutPlanRepository.findById(workoutPlanID).orElseThrow(() -> new NoSuchElementException("WorkoutPlan not found"));
 
         Map<DayOfWeek, Workout> dayWorkoutMapping = workoutPlan.getDayWorkoutMapping();
 
@@ -47,35 +50,35 @@ public class WorkoutPlanService {
     }
 
     public List<WorkoutPlan> getWorkoutPlanByPerson(Person person) {
-        return WorkoutPlanRepository.findByPerson(person);
+        return this.workoutPlanRepository.findByPerson(person);
     }
 
     public WorkoutPlan getWorkoutPlanByID(Long workoutPlanID){
-        return WorkoutPlanRepository.findById(workoutPlanID).orElse(null);
+        return this.workoutPlanRepository.findById(workoutPlanID).orElse(null);
     }
 
     public List<WorkoutPlan> getAllWorkoutPlans() {
-        return WorkoutPlanRepository.findAll();
+        return this.workoutPlanRepository.findAll();
     }
 
     public WorkoutPlan createWorkoutPlan(WorkoutPlan workoutPlan) {
         validateWorkoutPlan(workoutPlan);
 
-        return WorkoutPlanRepository.save(workoutPlan);
+        return this.workoutPlanRepository.save(workoutPlan);
     }
 
     public WorkoutPlan updateWorkoutPlan(Long id, WorkoutPlan updatedWorkoutPlan) {
         validateWorkoutPlan(updatedWorkoutPlan);
 
-        WorkoutPlan existingWorkoutPlan = WorkoutPlanRepository.findById(id)
+        WorkoutPlan existingWorkoutPlan = this.workoutPlanRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("WorkoutPlan not found"));
 
-        return WorkoutPlanRepository.save(existingWorkoutPlan);
+        return this.workoutPlanRepository.save(existingWorkoutPlan);
     }
 
     public boolean deleteWorkoutPlan(Long id) {
-        if (WorkoutPlanRepository.existsById(id)) {
-            WorkoutPlanRepository.deleteById(id);
+        if (this.workoutPlanRepository.existsById(id)) {
+            this.workoutPlanRepository.deleteById(id);
             return true;
         } else {
             return false;
