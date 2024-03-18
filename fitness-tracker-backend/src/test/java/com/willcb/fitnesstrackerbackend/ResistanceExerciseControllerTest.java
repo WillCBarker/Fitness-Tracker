@@ -19,7 +19,7 @@ public class ResistanceExerciseControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    public void getAllResistanceExercises() throws Exception {
+    public void getAllResistanceExercisesSuccess() throws Exception {
         ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.get("/exercises/resistance")
                 .contentType(MediaType.APPLICATION_JSON));
 

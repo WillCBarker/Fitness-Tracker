@@ -19,7 +19,7 @@ public class CardioExerciseControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    public void getAllCardioExercises() throws Exception {
+    public void getAllCardioExercisesSuccess() throws Exception {
         ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.get("/exercises/cardio")
                 .contentType(MediaType.APPLICATION_JSON));
 

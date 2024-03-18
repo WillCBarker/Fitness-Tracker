@@ -19,7 +19,7 @@ public class PersonControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    public void getAllPersons() throws Exception {
+    public void getAllPersonsSuccess() throws Exception {
         ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.get("/persons")
                 .contentType(MediaType.APPLICATION_JSON));
 

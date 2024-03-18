@@ -19,7 +19,7 @@ public class WorkoutPlanControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    public void getAllWorkoutPlans() throws Exception {
+    public void getAllWorkoutPlansSuccess() throws Exception {
         ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.get("/workoutplans")
                 .contentType(MediaType.APPLICATION_JSON));
 

@@ -6,10 +6,13 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import com.willcb.fitnesstrackerbackend.controllers.ExerciseController;
+
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -18,11 +21,18 @@ public class ExerciseControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    @Autowired
+    private ExerciseController controller;
+    
     @Test
-    public void getAllExercises() throws Exception {
-        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.get("/exercises")
-                .contentType(MediaType.APPLICATION_JSON));
+    void contextLoads() throws Exception {
+        assertThat(controller).isNotNull();
+    }
 
-        resultActions.andExpect(status().isOk());
+    @Test
+    public void getAllExercisesSuccess() throws Exception {
+        this.mockMvc.perform(get("/exercises")
+                    .contentType(MediaType.APPLICATION_JSON))
+                    .andExpect(status().isOk());
     }
 }
