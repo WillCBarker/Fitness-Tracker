@@ -13,8 +13,13 @@ import java.util.List;
 @Service
 public class PersonService {
 
+    private final PersonRepository personRepository;
+
     @Autowired
-    private PersonRepository personRepository;
+    public PersonService(PersonRepository personRepository) {
+        this.personRepository = personRepository;
+    }
+
 
     private void validatePerson(Person person) {
         // Validate person input
@@ -24,33 +29,33 @@ public class PersonService {
     }
 
     public Person getPersonByID(Long personID) {
-        return personRepository.findById(personID).orElse(null);
+        return this.personRepository.findById(personID).orElse(null);
     }
 
     public WorkoutPlan getWorkoutPlanByPersonID(Long personID){
-        Person person = personRepository.findById(personID).orElseThrow(() -> new NoSuchElementException("Person not found"));
+        Person person = this.personRepository.findById(personID).orElseThrow(() -> new NoSuchElementException("Person not found"));
         return person.getWorkoutPlan();
     }
 
     public List<Person> getAllPersons() {
-        return personRepository.findAll();
+        return this.personRepository.findAll();
     }
 
     public Person createPerson(Person person) {
         validatePerson(person);
 
-        return personRepository.save(person);
+        return this.personRepository.save(person);
     }
 
     public Person updatePerson(Long id, Person updatedPerson) {
         validatePerson(updatedPerson);
-        Person existingPerson = personRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Person not found"));
-        return personRepository.save(existingPerson);
+        Person existingPerson = this.personRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Person not found"));
+        return this.personRepository.save(existingPerson);
     }
 
     public boolean deletePerson(Long id) {
-        if (personRepository.existsById(id)) {
-            personRepository.deleteById(id);
+        if (this.personRepository.existsById(id)) {
+            this.personRepository.deleteById(id);
             return true;
         } else {
             return false;
