@@ -12,8 +12,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class CardioExerciseService {
 
+    private CardioExerciseRepository cardioExerciseRepository;
+
     @Autowired
-    private CardioExerciseRepository CardioExerciseRepository;
+    public CardioExerciseService(CardioExerciseRepository cardioExerciseRepository) {
+        this.cardioExerciseRepository = cardioExerciseRepository;
+    }
 
     private void validateCardioExercise(CardioExercise cardioExercise) {
         // Validate cardioExercise input
@@ -23,28 +27,28 @@ public class CardioExerciseService {
     }
 
     public CardioExercise getCardioExerciseByID(Long cardioExerciseID) {
-        return CardioExerciseRepository.findById(cardioExerciseID).orElse(null);
+        return this.cardioExerciseRepository.findById(cardioExerciseID).orElse(null);
     }
 
     public List<CardioExercise> getAllCardioExercises() {
-        return CardioExerciseRepository.findAll();
+        return this.cardioExerciseRepository.findAll();
     }
 
     public CardioExercise createCardioExercise(CardioExercise cardioExercise) {
         validateCardioExercise(cardioExercise);
 
-        return CardioExerciseRepository.save(cardioExercise);
+        return this.cardioExerciseRepository.save(cardioExercise);
     }
 
     public CardioExercise updateCardioExercise(Long id, CardioExercise updatedCardioExercise) {
         validateCardioExercise(updatedCardioExercise);
-        CardioExercise existingCardioExercise = CardioExerciseRepository.findById(id).orElseThrow(() -> new NoSuchElementException("CardioExercise not found"));
-        return CardioExerciseRepository.save(existingCardioExercise);
+        CardioExercise existingCardioExercise = this.cardioExerciseRepository.findById(id).orElseThrow(() -> new NoSuchElementException("CardioExercise not found"));
+        return this.cardioExerciseRepository.save(existingCardioExercise);
     }
 
     public boolean deleteCardioExercise(Long id) {
-        if (CardioExerciseRepository.existsById(id)) {
-            CardioExerciseRepository.deleteById(id);
+        if (this.cardioExerciseRepository.existsById(id)) {
+            this.cardioExerciseRepository.deleteById(id);
             return true;
         } else {
             return false;
