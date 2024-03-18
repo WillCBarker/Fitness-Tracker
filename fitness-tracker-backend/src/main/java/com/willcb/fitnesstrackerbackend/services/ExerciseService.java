@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ExerciseService {
 
-    private ExerciseRepository exerciseRepository;
+    private final ExerciseRepository exerciseRepository;
 
     @Autowired
     public ExerciseService(ExerciseRepository exerciseRepository) {
