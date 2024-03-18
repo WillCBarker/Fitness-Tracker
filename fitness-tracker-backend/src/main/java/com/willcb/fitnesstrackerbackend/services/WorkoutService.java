@@ -13,8 +13,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class WorkoutService {
 
+    private final WorkoutRepository workoutRepository;
+
     @Autowired
-    private WorkoutRepository WorkoutRepository;
+    public WorkoutService(WorkoutRepository workoutRepository) {
+        this.workoutRepository = workoutRepository;
+    }
 
     
     private void validateWorkout(Workout workout) {
@@ -25,7 +29,7 @@ public class WorkoutService {
     }
 
     public List<ExerciseDetailsDTO> getExerciseDetailsByWorkoutID(Long workoutID) {
-        Workout workout = WorkoutRepository.findById(workoutID).orElseThrow(() -> new NoSuchElementException("Workout not found"));
+        Workout workout = this.workoutRepository.findById(workoutID).orElseThrow(() -> new NoSuchElementException("Workout not found"));
     
         List<Exercise> exercises = workout.getExercises();
     
@@ -39,31 +43,31 @@ public class WorkoutService {
     }
 
     public Workout getWorkoutByID(Long workoutID){
-        return WorkoutRepository.findById(workoutID).orElse(null);
+        return this.workoutRepository.findById(workoutID).orElse(null);
     }
 
     public List<Workout> getAllWorkouts() {
-        return WorkoutRepository.findAll();
+        return this.workoutRepository.findAll();
     }
 
     public Workout createWorkout(Workout workout) {
         validateWorkout(workout);
 
-        return WorkoutRepository.save(workout);
+        return this.workoutRepository.save(workout);
     }
 
     public Workout updateWorkout(Long id, Workout updatedWorkout) {
         validateWorkout(updatedWorkout);
 
-        Workout existingWorkout = WorkoutRepository.findById(id)
+        Workout existingWorkout = this.workoutRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Workout not found"));
 
-        return WorkoutRepository.save(existingWorkout);
+        return this.workoutRepository.save(existingWorkout);
     }
 
     public boolean deleteWorkout(Long id) {
-        if (WorkoutRepository.existsById(id)) {
-            WorkoutRepository.deleteById(id);
+        if (this.workoutRepository.existsById(id)) {
+            this.workoutRepository.deleteById(id);
             return true;
         } else {
             return false;
