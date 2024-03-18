@@ -12,8 +12,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class ResistanceExerciseService {
 
+    public final ResistanceExerciseRepository resistanceExerciseRepository;
+    
     @Autowired
-    private ResistanceExerciseRepository ResistanceExerciseRepository;
+    public ResistanceExerciseService(ResistanceExerciseRepository resistanceExerciseRepository) {
+        this.resistanceExerciseRepository = resistanceExerciseRepository;
+    }
 
     private void validateResistanceExercise(ResistanceExercise resistanceExercise) {
         // Validate resistanceExercise input
@@ -23,28 +27,28 @@ public class ResistanceExerciseService {
     }
 
     public ResistanceExercise getResistanceExerciseByID(Long resistanceExerciseID) {
-        return ResistanceExerciseRepository.findById(resistanceExerciseID).orElse(null);
+        return this.resistanceExerciseRepository.findById(resistanceExerciseID).orElse(null);
     }
 
     public List<ResistanceExercise> getAllResistanceExercises() {
-        return ResistanceExerciseRepository.findAll();
+        return this.resistanceExerciseRepository.findAll();
     }
 
     public ResistanceExercise createResistanceExercise(ResistanceExercise resistanceExercise) {
         validateResistanceExercise(resistanceExercise);
 
-        return ResistanceExerciseRepository.save(resistanceExercise);
+        return this.resistanceExerciseRepository.save(resistanceExercise);
     }
 
     public ResistanceExercise updateResistanceExercise(Long id, ResistanceExercise updatedResistanceExercise) {
         validateResistanceExercise(updatedResistanceExercise);
-        ResistanceExercise existingResistanceExercise = ResistanceExerciseRepository.findById(id).orElseThrow(() -> new NoSuchElementException("ResistanceExercise not found"));
-        return ResistanceExerciseRepository.save(existingResistanceExercise);
+        ResistanceExercise existingResistanceExercise = this.resistanceExerciseRepository.findById(id).orElseThrow(() -> new NoSuchElementException("ResistanceExercise not found"));
+        return this.resistanceExerciseRepository.save(existingResistanceExercise);
     }
 
     public boolean deleteResistanceExercise(Long id) {
-        if (ResistanceExerciseRepository.existsById(id)) {
-            ResistanceExerciseRepository.deleteById(id);
+        if (this.resistanceExerciseRepository.existsById(id)) {
+            this.resistanceExerciseRepository.deleteById(id);
             return true;
         } else {
             return false;
