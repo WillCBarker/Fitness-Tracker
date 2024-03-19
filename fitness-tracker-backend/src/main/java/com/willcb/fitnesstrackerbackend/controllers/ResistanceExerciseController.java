@@ -46,11 +46,14 @@ public class ResistanceExerciseController {
 
         try {
             ResistanceExercise resistanceExercise = resistanceExerciseService.getResistanceExerciseByID(id);
-            return ResponseEntity.ok(resistanceExercise);
+            if (resistanceExercise != null) {
+                return ResponseEntity.ok(resistanceExercise);
+            }
+            else {
+                return ResponseEntity.notFound().build();
+            }
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
-        } catch (NoSuchElementException e) {
-            return ResponseEntity.notFound().build();
         }
     }
 
