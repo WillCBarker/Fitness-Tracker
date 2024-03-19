@@ -29,7 +29,7 @@ public class WorkoutService {
     }
 
     public List<ExerciseDetailsDTO> getExerciseDetailsByWorkoutID(Long workoutID) {
-        Workout workout = this.workoutRepository.findById(workoutID).orElseThrow(() -> new NoSuchElementException("Workout not found"));
+        Workout workout = this.workoutRepository.findById(workoutID).orElseThrow(() -> new NoSuchElementException("Workout with ID " + workoutID + " not found"));
     
         List<Exercise> exercises = workout.getExercises();
     

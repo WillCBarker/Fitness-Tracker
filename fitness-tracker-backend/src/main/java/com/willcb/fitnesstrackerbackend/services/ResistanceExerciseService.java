@@ -27,7 +27,8 @@ public class ResistanceExerciseService {
     }
 
     public ResistanceExercise getResistanceExerciseByID(Long resistanceExerciseID) {
-        return this.resistanceExerciseRepository.findById(resistanceExerciseID).orElse(null);
+        return this.resistanceExerciseRepository.findById(resistanceExerciseID)
+                .orElseThrow(() -> new NoSuchElementException("Resistance Exercise with ID " + resistanceExerciseID + " not found"));
     }
 
     public List<ResistanceExercise> getAllResistanceExercises() {

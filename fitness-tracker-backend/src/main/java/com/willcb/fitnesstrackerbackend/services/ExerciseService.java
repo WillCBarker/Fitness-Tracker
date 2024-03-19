@@ -4,7 +4,6 @@ import com.willcb.fitnesstrackerbackend.entities.Exercise;
 import com.willcb.fitnesstrackerbackend.repositories.ExerciseRepository;
 
 import java.util.*;
-import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +26,8 @@ public class ExerciseService {
     }
 
     public Exercise getExerciseByID(Long exerciseID){
-        return this.exerciseRepository.findById(exerciseID).orElse(null);
+        return this.exerciseRepository.findById(exerciseID)
+                .orElseThrow(() -> new NoSuchElementException("Exercise with ID " + exerciseID + " not found"));
     }
 
     public List<Exercise> getAllExercises() {

@@ -45,13 +45,11 @@ public class PersonController {
 
         try {
             Person person = personService.getPersonByID(id);
-            if (person != null) {
-                return ResponseEntity.ok(person);
-            } else {
-                return ResponseEntity.notFound().build();
-            }
+            return ResponseEntity.ok(person);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.notFound().build();
         }
     }
 

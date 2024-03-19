@@ -27,7 +27,8 @@ public class CardioExerciseService {
     }
 
     public CardioExercise getCardioExerciseByID(Long cardioExerciseID) {
-        return this.cardioExerciseRepository.findById(cardioExerciseID).orElse(null);
+        return this.cardioExerciseRepository.findById(cardioExerciseID)
+                .orElseThrow(() -> new NoSuchElementException("Cardio exercise with ID " + cardioExerciseID + " not found"));
     }
 
     public List<CardioExercise> getAllCardioExercises() {

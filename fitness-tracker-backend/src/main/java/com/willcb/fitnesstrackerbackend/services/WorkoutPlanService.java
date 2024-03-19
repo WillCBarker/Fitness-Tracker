@@ -7,9 +7,7 @@ import com.willcb.fitnesstrackerbackend.entities.Workout;
 import com.willcb.fitnesstrackerbackend.entities.WorkoutPlan;
 
 import java.time.DayOfWeek;
-import java.util.ArrayList;
 import java.util.*;
-import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,7 +30,7 @@ public class WorkoutPlanService {
     }
 
     public List<WorkoutDetailsDTO> getWorkoutsDetailsByPlanId(Long workoutPlanID) {
-        WorkoutPlan workoutPlan = this.workoutPlanRepository.findById(workoutPlanID).orElseThrow(() -> new NoSuchElementException("WorkoutPlan not found"));
+        WorkoutPlan workoutPlan = this.workoutPlanRepository.findById(workoutPlanID).orElseThrow(() -> new NoSuchElementException("Workout plan with ID " + workoutPlanID + " not found"));
 
         Map<DayOfWeek, Workout> dayWorkoutMapping = workoutPlan.getDayWorkoutMapping();
 

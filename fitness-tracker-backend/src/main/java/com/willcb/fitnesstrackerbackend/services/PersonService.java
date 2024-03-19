@@ -29,7 +29,8 @@ public class PersonService {
     }
 
     public Person getPersonByID(Long personID) {
-        return this.personRepository.findById(personID).orElse(null);
+        return this.personRepository.findById(personID)
+                .orElseThrow(() -> new NoSuchElementException("Person with ID " + personID + " not found"));
     }
 
     public WorkoutPlan getWorkoutPlanByPersonID(Long personID){
