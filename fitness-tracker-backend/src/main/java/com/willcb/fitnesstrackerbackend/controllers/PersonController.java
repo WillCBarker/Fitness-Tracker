@@ -22,12 +22,24 @@ public class PersonController {
         this.personService = personService;
     }
 
+    /**
+     *  Retrieves all people from database.
+     * 
+     *  @return list of person objects
+     */
     @GetMapping
     public List<Person> getAllPersons() {
-        // need service method
         return this.personService.getAllPersons();
     }
 
+    /**
+     * Retrieves specific person by id.
+     * 
+     * @param id The ID of the person to be updated.
+     * @return ResponseEntity<Person> on success,
+     *         a bad request response if the provided data is invalid, 
+     *         or a not found response if the person with the specified ID does not exist.
+     */
     @GetMapping("/{id}")
     public ResponseEntity<Person> getPersonByID(@PathVariable Long id) {
 
@@ -41,6 +53,13 @@ public class PersonController {
         }
     }
 
+    /**
+     * Creates a new person.
+     * 
+     * @param person - The person object to be created.
+     * @return ResponseEntity<Person> on success
+     *         or a bad request response if the provided data is invalid.
+     */
     @PostMapping
     public ResponseEntity<Person> createPerson(@RequestBody Person person) {
 
@@ -52,6 +71,15 @@ public class PersonController {
         }
     }
 
+    /**
+     * Updates an existing person with the specified ID.
+     * 
+     * @param id The ID of the person to be updated.
+     * @param updatedPerson The updated information of the person.
+     * @return ResponseEntity<Person> on success,
+     *         a bad request response if the provided data is invalid, 
+     *         or a not found response if the person with the specified ID does not exist.
+     */
     @PutMapping("/{id}")
     public ResponseEntity<Person> updatePerson(@PathVariable Long id, @RequestBody Person updatedPerson) {
 
@@ -65,6 +93,13 @@ public class PersonController {
         }
     }
 
+    /**
+     * Deletes an existing person with the specified ID.
+     * 
+     * @param id The ID of the person to be deleted.
+     * @return ResponseEntity<Void> on success,
+     *         or a not found response if the person with the specified ID does not exist.
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePerson(@PathVariable Long id) {
         boolean deleted = this.personService.deletePerson(id);
