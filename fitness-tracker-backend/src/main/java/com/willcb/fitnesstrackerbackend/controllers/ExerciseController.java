@@ -18,20 +18,36 @@ import org.springframework.web.bind.annotation.RestController;
 import com.willcb.fitnesstrackerbackend.entities.Exercise;
 import com.willcb.fitnesstrackerbackend.services.ExerciseService;
 
-
 @RestController
 @RequestMapping("/exercises")
 public class ExerciseController {
 
+    private final ExerciseService exerciseService;
+    
     @Autowired
-    private ExerciseService exerciseService;
+    public ExerciseController(ExerciseService exerciseService) {
+        this.exerciseService = exerciseService;
+    }
 
+    /**
+     * Retrieves all exercises.
+     * 
+     * @return List<Exercise> The list of all exercises.
+     */
     @GetMapping
     public List<Exercise> getAllExercises() {
         // need service method
         return exerciseService.getAllExercises();
     }
 
+    /**
+     * Retrieves an exercise by its ID.
+     * 
+     * @param id The ID of the exercise to retrieve.
+     * @return ResponseEntity<Exercise> The ResponseEntity containing the exercise if found,
+     *         a bad request response if the provided ID is invalid,
+     *         or a not found response if the exercise with the specified ID does not exist.
+     */
     @GetMapping("/{id}")
     public ResponseEntity<Exercise> getExerciseByID(@PathVariable Long id) {
 
@@ -45,6 +61,13 @@ public class ExerciseController {
         }
     }
 
+    /**
+     * Creates a new exercise.
+     * 
+     * @param exercise The exercise object to be created.
+     * @return ResponseEntity<Exercise> The ResponseEntity containing the created exercise if successful,
+     *         or a bad request response if the provided data is invalid.
+     */
     @PostMapping
     public ResponseEntity<Exercise> createExercise(@RequestBody Exercise exercise) {
 
@@ -56,6 +79,15 @@ public class ExerciseController {
         }
     }
 
+    /**
+     * Updates an existing exercise with the specified ID.
+     * 
+     * @param id The ID of the exercise to be updated.
+     * @param updatedExercise The updated information of the exercise.
+     * @return ResponseEntity<Exercise> The ResponseEntity containing the updated exercise if successful,
+     *         a bad request response if the provided data is invalid,
+     *         or a not found response if the exercise with the specified ID does not exist.
+     */
     @PutMapping("/{id}")
     public ResponseEntity<Exercise> updateExercise(@PathVariable Long id, @RequestBody Exercise updatedExercise) {
 
@@ -69,6 +101,13 @@ public class ExerciseController {
         }
     }
 
+    /**
+     * Deletes an existing exercise with the specified ID.
+     * 
+     * @param id The ID of the exercise to be deleted.
+     * @return ResponseEntity<Void> The ResponseEntity indicating success if the exercise is deleted,
+     *         or a not found response if the exercise with the specified ID does not exist.
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteExercise(@PathVariable Long id) {
         boolean deleted = exerciseService.deleteExercise(id);
@@ -80,3 +119,4 @@ public class ExerciseController {
         }
     }
 }
+
