@@ -18,20 +18,35 @@ import org.springframework.web.bind.annotation.RestController;
 import com.willcb.fitnesstrackerbackend.entities.CardioExercise;
 import com.willcb.fitnesstrackerbackend.services.CardioExerciseService;
 
-
 @RestController
 @RequestMapping("/exercises/cardio")
 public class CardioExerciseController {
 
-    @Autowired
-    private CardioExerciseService cardioExerciseService;
+    private final CardioExerciseService cardioExerciseService;
 
+    @Autowired
+    public CardioExerciseController(CardioExerciseService cardioExerciseService) {
+        this.cardioExerciseService = cardioExerciseService;
+    }
+
+    /**
+     * Retrieves all cardio exercises.
+     * 
+     * @return List<CardioExercise> The list of all cardio exercises.
+     */
     @GetMapping
     public List<CardioExercise> getAllCardioExercises() {
-        // need service method
         return cardioExerciseService.getAllCardioExercises();
     }
 
+    /**
+     * Retrieves a cardio exercise by its ID.
+     * 
+     * @param id The ID of the cardio exercise to retrieve.
+     * @return ResponseEntity<CardioExercise> The ResponseEntity containing the cardio exercise if found,
+     *         a bad request response if the provided ID is invalid,
+     *         or a not found response if the cardio exercise with the specified ID does not exist.
+     */
     @GetMapping("/{id}")
     public ResponseEntity<CardioExercise> getCardioExerciseByID(@PathVariable Long id) {
 
@@ -45,7 +60,13 @@ public class CardioExerciseController {
         }
     }
 
-
+    /**
+     * Creates a new cardio exercise.
+     * 
+     * @param cardioExercise The cardio exercise object to be created.
+     * @return ResponseEntity<CardioExercise> The ResponseEntity containing the created cardio exercise if successful,
+     *         or a bad request response if the provided data is invalid.
+     */
     @PostMapping
     public ResponseEntity<CardioExercise> createCardioExercise(@RequestBody CardioExercise cardioExercise) {
 
@@ -57,6 +78,15 @@ public class CardioExerciseController {
         }
     }
 
+    /**
+     * Updates an existing cardio exercise with the specified ID.
+     * 
+     * @param id The ID of the cardio exercise to be updated.
+     * @param updatedCardioExercise The updated information of the cardio exercise.
+     * @return ResponseEntity<CardioExercise> The ResponseEntity containing the updated cardio exercise if successful,
+     *         a bad request response if the provided data is invalid,
+     *         or a not found response if the cardio exercise with the specified ID does not exist.
+     */
     @PutMapping("/{id}")
     public ResponseEntity<CardioExercise> updateCardioExercise(@PathVariable Long id, @RequestBody CardioExercise updatedCardioExercise) {
 
@@ -70,6 +100,13 @@ public class CardioExerciseController {
         }
     }
 
+    /**
+     * Deletes an existing cardio exercise with the specified ID.
+     * 
+     * @param id The ID of the cardio exercise to be deleted.
+     * @return ResponseEntity<Void> The ResponseEntity indicating success if the cardio exercise is deleted,
+     *         or a not found response if the cardio exercise with the specified ID does not exist.
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCardioExercise(@PathVariable Long id) {
         boolean deleted = cardioExerciseService.deleteCardioExercise(id);
@@ -81,3 +118,4 @@ public class CardioExerciseController {
         }
     }
 }
+
