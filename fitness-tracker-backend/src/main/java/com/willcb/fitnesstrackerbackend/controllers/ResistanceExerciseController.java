@@ -48,8 +48,7 @@ public class ResistanceExerciseController {
             ResistanceExercise resistanceExercise = resistanceExerciseService.getResistanceExerciseByID(id);
             if (resistanceExercise != null) {
                 return ResponseEntity.ok(resistanceExercise);
-            }
-            else {
+            } else {
                 return ResponseEntity.notFound().build();
             }
         } catch (IllegalArgumentException e) {
