@@ -29,7 +29,7 @@ public class PersonController {
      */
     @GetMapping
     public List<Person> getAllPersons() {
-        return this.personService.getAllPersons();
+        return personService.getAllPersons();
     }
 
     /**
@@ -44,7 +44,7 @@ public class PersonController {
     public ResponseEntity<Person> getPersonByID(@PathVariable Long id) {
 
         try {
-            Person person = this.personService.getPersonByID(id);
+            Person person = personService.getPersonByID(id);
             return ResponseEntity.ok(person);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
@@ -64,7 +64,7 @@ public class PersonController {
     public ResponseEntity<Person> createPerson(@RequestBody Person person) {
 
         try {
-            Person createdPerson = this.personService.createPerson(person);
+            Person createdPerson = personService.createPerson(person);
             return ResponseEntity.status(HttpStatus.CREATED).body(createdPerson);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
@@ -84,7 +84,7 @@ public class PersonController {
     public ResponseEntity<Person> updatePerson(@PathVariable Long id, @RequestBody Person updatedPerson) {
 
         try {
-            Person person = this.personService.updatePerson(id, updatedPerson);
+            Person person = personService.updatePerson(id, updatedPerson);
             return ResponseEntity.ok(person);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
@@ -102,7 +102,7 @@ public class PersonController {
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePerson(@PathVariable Long id) {
-        boolean deleted = this.personService.deletePerson(id);
+        boolean deleted = personService.deletePerson(id);
 
         if (deleted) {
             return ResponseEntity.noContent().build();
