@@ -6,14 +6,7 @@ import java.util.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.willcb.fitnesstrackerbackend.dto.ExerciseDetailsDTO;
 import com.willcb.fitnesstrackerbackend.entities.Workout;
@@ -24,15 +17,31 @@ import com.willcb.fitnesstrackerbackend.services.WorkoutService;
 @RequestMapping("/workouts")
 public class WorkoutController {
 
-    @Autowired
-    private WorkoutService workoutService;
+    private final WorkoutService workoutService;
 
+    @Autowired
+    public WorkoutController(WorkoutService workoutService) {
+        this.workoutService = workoutService;
+    }
+
+    /**
+     * Retrieves all workouts.
+     * 
+     * @return List<Workout> The list of all workouts.
+     */
     @GetMapping
     public List<Workout> getAllWorkouts() {
-        // need service method
         return workoutService.getAllWorkouts();
     }
 
+    /**
+     * Retrieves a workout by its ID.
+     * 
+     * @param id The ID of the workout to retrieve.
+     * @return ResponseEntity<Workout> The ResponseEntity containing the workout if found,
+     *         a bad request response if the provided ID is invalid,
+     *         or a not found response if the workout with the specified ID does not exist.
+     */
     @GetMapping("/{id}")
     public ResponseEntity<Workout> getWorkoutByID(@PathVariable Long id) {
 
@@ -46,6 +55,13 @@ public class WorkoutController {
         }
     }
 
+    /**
+     * Retrieves exercises for a workout by its ID.
+     * 
+     * @param id The ID of the workout to retrieve exercises for.
+     * @return ResponseEntity<List<ExerciseDetailsDTO>> The ResponseEntity containing the list of exercise details if found,
+     *         or a not found response if the workout with the specified ID does not exist or has no exercises.
+     */
     @GetMapping("/{id}/exercises")
     public ResponseEntity<List<ExerciseDetailsDTO>> getExercisesByWorkoutId(@PathVariable Long id) {
         try {
@@ -61,6 +77,13 @@ public class WorkoutController {
         }
     }
 
+    /**
+     * Creates a new workout.
+     * 
+     * @param workout The workout object to be created.
+     * @return ResponseEntity<Workout> The ResponseEntity containing the created workout if successful,
+     *         or a bad request response if the provided data is invalid.
+     */
     @PostMapping
     public ResponseEntity<Workout> createWorkout(@RequestBody Workout workout) {
 
@@ -72,6 +95,15 @@ public class WorkoutController {
         }
     }
 
+    /**
+     * Updates an existing workout with the specified ID.
+     * 
+     * @param id The ID of the workout to be updated.
+     * @param updatedWorkout The updated information of the workout.
+     * @return ResponseEntity<Workout> The ResponseEntity containing the updated workout if successful,
+     *         a bad request response if the provided data is invalid,
+     *         or a not found response if the workout with the specified ID does not exist.
+     */
     @PutMapping("/{id}")
     public ResponseEntity<Workout> updateWorkout(@PathVariable Long id, @RequestBody Workout updatedWorkout) {
 
@@ -85,6 +117,13 @@ public class WorkoutController {
         }
     }
 
+    /**
+     * Deletes an existing workout with the specified ID.
+     * 
+     * @param id The ID of the workout to be deleted.
+     * @return ResponseEntity<Void> The ResponseEntity indicating success if the workout is deleted,
+     *         or a not found response if the workout with the specified ID does not exist.
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteWorkout(@PathVariable Long id) {
         boolean deleted = workoutService.deleteWorkout(id);
@@ -96,3 +135,4 @@ public class WorkoutController {
         }
     }
 }
+
