@@ -1,13 +1,6 @@
 package com.willcb.fitnesstrackerbackend.controllers;
 
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.willcb.fitnesstrackerbackend.entities.ResistanceExercise;
 import com.willcb.fitnesstrackerbackend.services.ResistanceExerciseService;
@@ -23,15 +16,31 @@ import org.springframework.http.ResponseEntity;
 @RequestMapping("/exercises/resistance")
 public class ResistanceExerciseController {
 
-    @Autowired
-    private ResistanceExerciseService resistanceExerciseService;
+    private final ResistanceExerciseService resistanceExerciseService;
 
+    @Autowired
+    public ResistanceExerciseController(ResistanceExerciseService resistanceExerciseService) {
+        this.resistanceExerciseService = resistanceExerciseService;
+    }
+
+    /**
+     * Retrieves all resistance exercises.
+     * 
+     * @return List<ResistanceExercise> The list of all resistance exercises.
+     */
     @GetMapping
     public List<ResistanceExercise> getAllResistanceExercises() {
-        // need service method
         return resistanceExerciseService.getAllResistanceExercises();
     }
 
+    /**
+     * Retrieves a resistance exercise by its ID.
+     * 
+     * @param id The ID of the resistance exercise to retrieve.
+     * @return ResponseEntity<ResistanceExercise> The ResponseEntity containing the resistance exercise if found,
+     *         a bad request response if the provided ID is invalid,
+     *         or a not found response if the resistance exercise with the specified ID does not exist.
+     */
     @GetMapping("/{id}")
     public ResponseEntity<ResistanceExercise> getResistanceExerciseByID(@PathVariable Long id) {
 
@@ -45,7 +54,13 @@ public class ResistanceExerciseController {
         }
     }
 
-
+    /**
+     * Creates a new resistance exercise.
+     * 
+     * @param resistanceExercise The resistance exercise object to be created.
+     * @return ResponseEntity<ResistanceExercise> The ResponseEntity containing the created resistance exercise if successful,
+     *         or a bad request response if the provided data is invalid.
+     */
     @PostMapping
     public ResponseEntity<ResistanceExercise> createResistanceExercise(@RequestBody ResistanceExercise resistanceExercise) {
 
@@ -57,6 +72,15 @@ public class ResistanceExerciseController {
         }
     }
 
+    /**
+     * Updates an existing resistance exercise with the specified ID.
+     * 
+     * @param id The ID of the resistance exercise to be updated.
+     * @param updatedResistanceExercise The updated information of the resistance exercise.
+     * @return ResponseEntity<ResistanceExercise> The ResponseEntity containing the updated resistance exercise if successful,
+     *         a bad request response if the provided data is invalid,
+     *         or a not found response if the resistance exercise with the specified ID does not exist.
+     */
     @PutMapping("/{id}")
     public ResponseEntity<ResistanceExercise> updateResistanceExercise(@PathVariable Long id, @RequestBody ResistanceExercise updatedResistanceExercise) {
 
@@ -70,6 +94,13 @@ public class ResistanceExerciseController {
         }
     }
 
+    /**
+     * Deletes an existing resistance exercise with the specified ID.
+     * 
+     * @param id The ID of the resistance exercise to be deleted.
+     * @return ResponseEntity<Void> The ResponseEntity indicating success if the resistance exercise is deleted,
+     *         or a not found response if the resistance exercise with the specified ID does not exist.
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteResistanceExercise(@PathVariable Long id) {
         boolean deleted = resistanceExerciseService.deleteResistanceExercise(id);
@@ -81,4 +112,5 @@ public class ResistanceExerciseController {
         }
     }
 }
+
  
