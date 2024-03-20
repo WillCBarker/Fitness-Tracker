@@ -12,14 +12,13 @@ import java.util.List;
 
 @Service
 public class PersonService {
-
+    
     private final PersonRepository personRepository;
 
     @Autowired
     public PersonService(PersonRepository personRepository) {
         this.personRepository = personRepository;
     }
-
 
     private void validatePerson(Person person) {
         // Validate person input
@@ -28,35 +27,35 @@ public class PersonService {
         }
     }
 
-    public Person getPersonByID(Long personID) {
-        return this.personRepository.findById(personID)
+    public Person getPersonByID(int personID) {
+        return personRepository.findById(personID)
                 .orElseThrow(() -> new NoSuchElementException("Person with ID " + personID + " not found"));
     }
 
-    public WorkoutPlan getWorkoutPlanByPersonID(Long personID){
-        Person person = this.personRepository.findById(personID).orElseThrow(() -> new NoSuchElementException("Person not found"));
+    public WorkoutPlan getWorkoutPlanByPersonID(int personID){
+        Person person = personRepository.findById(personID).orElseThrow(() -> new NoSuchElementException("Person not found"));
         return person.getWorkoutPlan();
     }
 
     public List<Person> getAllPersons() {
-        return this.personRepository.findAll();
+        return personRepository.findAll();
     }
 
     public Person createPerson(Person person) {
         validatePerson(person);
 
-        return this.personRepository.save(person);
+        return personRepository.save(person);
     }
 
-    public Person updatePerson(Long id, Person updatedPerson) {
+    public Person updatePerson(int id, Person updatedPerson) {
         validatePerson(updatedPerson);
-        Person existingPerson = this.personRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Person not found"));
-        return this.personRepository.save(existingPerson);
+        Person existingPerson = personRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Person not found"));
+        return personRepository.save(existingPerson);
     }
 
-    public boolean deletePerson(Long id) {
-        if (this.personRepository.existsById(id)) {
-            this.personRepository.deleteById(id);
+    public boolean deletePerson(int id) {
+        if (personRepository.existsById(id)) {
+            personRepository.deleteById(id);
             return true;
         } else {
             return false;
