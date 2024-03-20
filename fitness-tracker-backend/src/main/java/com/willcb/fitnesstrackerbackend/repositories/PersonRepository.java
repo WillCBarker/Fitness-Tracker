@@ -7,7 +7,6 @@ import com.willcb.fitnesstrackerbackend.entities.Person;
 
 @Repository
 public interface PersonRepository extends JpaRepository<Person, Integer> {
-    // put queries here?
-    
+    // Custom Queries
 }
 
