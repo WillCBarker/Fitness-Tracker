@@ -110,6 +110,12 @@ public class Exercise {
         this.exercise_type = exercise_type;
     }
 
+    @Override
+    public String toString() {
+        return "Exercise [id=" + id + ", name=" + name + ", distance=" + distance + ", duration=" + duration + ", reps="
+                + reps + ", sets=" + sets + ", weight=" + weight + ", exercise_type=" + exercise_type + "]";
+    }
+
     
     
 }
