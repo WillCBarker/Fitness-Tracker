@@ -10,36 +10,106 @@ public class Exercise {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name="id")
+    private int id;
 
-
-    @ManyToOne
-    @JoinColumn(name = "workout_id")  // Adjust the column name if needed
-    private Workout workout;
-
-
+    @Column(name="name")
     private String name;
+
+    @Column(name="distance")
+    private double distance;
+
+    @Column(name="duration")
+    private int duration;
+
+    @Column(name="reps")
+    private int reps;
+
+    @Column(name="sets")
+    private int sets;
+
+    @Column(name="weight")
+    private double weight;
+
+    @Column(name="exercise_type")
+    private String exercise_type;
 
     public Exercise() {
     }
 
-    public Exercise(String name) {
+    public Exercise(String name, double distance, int duration, int reps, int sets, double weight,
+            String exercise_type) {
         this.name = name;
+        this.distance = distance;
+        this.duration = duration;
+        this.reps = reps;
+        this.sets = sets;
+        this.weight = weight;
+        this.exercise_type = exercise_type;
     }
 
-    // Getters
-
-    public Long getId() {
-        return this.id;
+    // Getters and Setters
+    
+    public int getId() {
+        return id;
     }
 
     public String getName() {
-        return this.name;
+        return name;
     }
-
-    // Setters
 
     public void setName(String name) {
         this.name = name;
     }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public int getReps() {
+        return reps;
+    }
+
+    public void setReps(int reps) {
+        this.reps = reps;
+    }
+
+    public int getSets() {
+        return sets;
+    }
+
+    public void setSets(int sets) {
+        this.sets = sets;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
+    public String getExercise_type() {
+        return exercise_type;
+    }
+
+    public void setExercise_type(String exercise_type) {
+        this.exercise_type = exercise_type;
+    }
+
+    
+    
 }
