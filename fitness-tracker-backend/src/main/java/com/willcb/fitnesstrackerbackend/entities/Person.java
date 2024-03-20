@@ -8,12 +8,22 @@ public class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name="id")
+    private int id;
 
+    @Column(name="name")
     private String name;
+
+    @Column(name="age")
     private int age;
+
+    @Column(name="weight")
     private double weight;
+
+    @Column(name="height")
     private double height;
+
+    @Column(name="gender")
     private String gender;
 
     @OneToOne(mappedBy = "person", cascade = CascadeType.ALL)
@@ -22,7 +32,7 @@ public class Person {
     public Person() {
     }
 
-    public Person(String name, Integer age, Double height, Double weight, String gender) {
+    public Person(String name, int age, Double height, Double weight, String gender) {
         this.name = name;
         this.age = age;
         this.height = height;
@@ -32,32 +42,32 @@ public class Person {
 
     // Getters
 
-    public Long getId() {
-        return this.id;
+    public int getId() {
+        return id;
     }
 
     public String getName() {
-        return this.name;
+        return name;
     }
 
     public int getAge() {
-        return this.age;
+        return age;
     }
 
     public double getWeight() {
-        return this.weight;
+        return weight;
     }
 
     public double getHeight() {
-        return this.height;
+        return height;
     }
 
     public String getGender() {
-        return this.gender;
+        return gender;
     }
 
     public WorkoutPlan getWorkoutPlan() {
-        return this.workoutPlan;
+        return workoutPlan;
     }
 
     // Setters
@@ -88,5 +98,11 @@ public class Person {
         if (workoutPlan != null) {
             workoutPlan.setPerson(this);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Person [id=" + id + ", name=" + name + ", age=" + age + ", weight=" + weight + ", height=" + height
+                + ", gender=" + gender + ", workoutPlan=" + workoutPlan + "]";
     }
 }
