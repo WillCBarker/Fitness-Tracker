@@ -41,7 +41,7 @@ public class PersonController {
      *         or a not found response if the person with the specified ID does not exist.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Person> getPersonByID(@PathVariable Long id) {
+    public ResponseEntity<Person> getPersonByID(@PathVariable int id) {
 
         try {
             Person person = personService.getPersonByID(id);
@@ -81,7 +81,7 @@ public class PersonController {
      *         or a not found response if the person with the specified ID does not exist.
      */
     @PutMapping("/{id}")
-    public ResponseEntity<Person> updatePerson(@PathVariable Long id, @RequestBody Person updatedPerson) {
+    public ResponseEntity<Person> updatePerson(@PathVariable int id, @RequestBody Person updatedPerson) {
 
         try {
             Person person = personService.updatePerson(id, updatedPerson);
@@ -101,7 +101,7 @@ public class PersonController {
      *         or a not found response if the person with the specified ID does not exist.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePerson(@PathVariable Long id) {
+    public ResponseEntity<Void> deletePerson(@PathVariable int id) {
         boolean deleted = personService.deletePerson(id);
 
         if (deleted) {
