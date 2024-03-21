@@ -10,14 +10,15 @@ public class WorkoutPlan {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name="id")
+    private int id;
+
+    @Column(nullable = false, name="name")
+    private String name;
 
     @ManyToOne
     @JoinColumn(name = "person_id")
     private Person person;
-
-    @Column(nullable = false)
-    private String name;
 
     // Map each day of the week to a collection of exercises (a Workout)
     @ElementCollection
@@ -35,7 +36,7 @@ public class WorkoutPlan {
 
     // Getters
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
@@ -53,10 +54,6 @@ public class WorkoutPlan {
 
     // Setters
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public void setPerson(Person person) {
         this.person = person;
     }
@@ -69,6 +66,11 @@ public class WorkoutPlan {
         this.dayWorkoutMapping = dayWorkoutMapping;
     }
 
+    @Override
+    public String toString() {
+        return "WorkoutPlan [id=" + id + ", name=" + name + ", person=" + person + ", dayWorkoutMapping="
+                + dayWorkoutMapping + "]";
+    }
 }
 
 
