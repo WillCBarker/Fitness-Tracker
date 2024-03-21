@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "exercise")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "exercise_type", discriminatorType = DiscriminatorType.STRING)
 public class Exercise {
 
     @Id
@@ -33,6 +32,10 @@ public class Exercise {
 
     @Column(name="exercise_type")
     private String exercise_type;
+
+    @ManyToOne
+    @JoinColumn(name = "workout_id")
+    private Workout workout;
 
     public Exercise() {
     }
@@ -115,7 +118,4 @@ public class Exercise {
         return "Exercise [id=" + id + ", name=" + name + ", distance=" + distance + ", duration=" + duration + ", reps="
                 + reps + ", sets=" + sets + ", weight=" + weight + ", exercise_type=" + exercise_type + "]";
     }
-
-    
-    
 }
