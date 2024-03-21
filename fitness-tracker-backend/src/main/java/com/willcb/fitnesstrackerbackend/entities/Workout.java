@@ -10,13 +10,16 @@ public class Workout {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name="id")
+    private int id;
+
+    @Column(name="label")
+    private String label;
 
     @ManyToOne
     @JoinColumn(name = "plan_id")
+    @Column(name="workoutPlan");
     private WorkoutPlan workoutPlan;
-
-    private String label;
 
     @OneToMany(mappedBy = "workout", cascade = CascadeType.ALL)
     private List<Exercise> exercises;
@@ -32,7 +35,7 @@ public class Workout {
 
     // Getters
 
-    public Long getId() {
+    public int getId() {
         return this.id;
     }
 
@@ -61,4 +64,10 @@ public class Workout {
     public void setExercises(List<Exercise> exercises) {
         this.exercises = exercises;
     }
+
+    @Override
+    public String toString() {
+        return "Workout [id=" + id + ", label=" + label + ", workoutPlan=" + workoutPlan + ", exercises=" + exercises
+                + "]";
+    }    
 }
