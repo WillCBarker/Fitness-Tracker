@@ -18,7 +18,6 @@ public class Workout {
 
     @ManyToOne
     @JoinColumn(name = "plan_id")
-    @Column(name="workoutPlan");
     private WorkoutPlan workoutPlan;
 
     @OneToMany(mappedBy = "workout", cascade = CascadeType.ALL)
