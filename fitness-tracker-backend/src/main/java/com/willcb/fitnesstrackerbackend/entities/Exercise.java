@@ -16,19 +16,19 @@ public class Exercise {
     private String name;
 
     @Column(name="distance")
-    private double distance;
+    private Double distance;
 
     @Column(name="duration")
-    private int duration;
+    private Integer duration;
 
     @Column(name="reps")
-    private int reps;
+    private Integer reps;
 
     @Column(name="sets")
-    private int sets;
+    private Integer sets;
 
     @Column(name="weight")
-    private double weight;
+    private Double weight;
 
     @Column(name="exercise_type")
     private String exercise_type;
@@ -40,7 +40,7 @@ public class Exercise {
     public Exercise() {
     }
 
-    public Exercise(String name, double distance, int duration, int reps, int sets, double weight,
+    public Exercise(String name, Double distance, Integer duration, Integer reps, Integer sets, Double weight,
             String exercise_type) {
         this.name = name;
         this.distance = distance;
