@@ -31,7 +31,7 @@ public class Exercise {
     private Double weight;
 
     @Column(name="exercise_type")
-    private String exercise_type;
+    private String exerciseType;
 
     @ManyToOne
     @JoinColumn(name = "workout_id")
@@ -41,20 +41,24 @@ public class Exercise {
     }
 
     public Exercise(String name, Double distance, Integer duration, Integer reps, Integer sets, Double weight,
-            String exercise_type) {
+            String exerciseType) {
         this.name = name;
         this.distance = distance;
         this.duration = duration;
         this.reps = reps;
         this.sets = sets;
         this.weight = weight;
-        this.exercise_type = exercise_type;
+        this.exerciseType = exerciseType;
     }
 
     // Getters and Setters
     
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -105,17 +109,17 @@ public class Exercise {
         this.weight = weight;
     }
 
-    public String getExercise_type() {
-        return exercise_type;
+    public String getExerciseType() {
+        return exerciseType;
     }
 
-    public void setExercise_type(String exercise_type) {
-        this.exercise_type = exercise_type;
+    public void setExerciseType(String exercise_type) {
+        this.exerciseType = exercise_type;
     }
 
     @Override
     public String toString() {
         return "Exercise [id=" + id + ", name=" + name + ", distance=" + distance + ", duration=" + duration + ", reps="
-                + reps + ", sets=" + sets + ", weight=" + weight + ", exercise_type=" + exercise_type + "]";
+                + reps + ", sets=" + sets + ", weight=" + weight + ", exercise_type=" + exerciseType + "]";
     }
 }
