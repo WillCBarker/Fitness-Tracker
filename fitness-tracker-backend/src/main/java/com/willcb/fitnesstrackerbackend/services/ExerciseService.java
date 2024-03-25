@@ -1,12 +1,13 @@
 package com.willcb.fitnesstrackerbackend.services;
 
-import com.willcb.fitnesstrackerbackend.entities.Exercise;
-import com.willcb.fitnesstrackerbackend.repositories.ExerciseRepository;
-
-import java.util.*;
+import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.willcb.fitnesstrackerbackend.entities.Exercise;
+import com.willcb.fitnesstrackerbackend.repositories.ExerciseRepository;
 
 @Service
 public class ExerciseService {
