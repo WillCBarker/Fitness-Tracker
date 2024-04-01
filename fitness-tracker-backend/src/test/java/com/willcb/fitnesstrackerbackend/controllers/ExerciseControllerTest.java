@@ -1,4 +1,4 @@
-package com.willcb.fitnesstrackerbackend;
+package com.willcb.fitnesstrackerbackend.controllers;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +22,11 @@ public class ExerciseControllerTest {
     private MockMvc mockMvc;
 
     @Autowired
-    private ExerciseController controller;
+    private ExerciseController exerciseController;
     
     @Test
     void contextLoads() throws Exception {
-        assertThat(controller).isNotNull();
+        assertThat(exerciseController).isNotNull();
     }
 
     @Test

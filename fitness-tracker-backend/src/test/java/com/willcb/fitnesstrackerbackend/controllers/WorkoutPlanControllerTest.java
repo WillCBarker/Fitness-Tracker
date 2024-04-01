@@ -1,4 +1,4 @@
-package com.willcb.fitnesstrackerbackend;
+package com.willcb.fitnesstrackerbackend.controllers;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,14 +13,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class WorkoutControllerTest {
+public class WorkoutPlanControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    public void getAllWorkoutsSuccess() throws Exception {
-        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.get("/workouts")
+    public void getAllWorkoutPlansSuccess() throws Exception {
+        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.get("/workoutplans")
                 .contentType(MediaType.APPLICATION_JSON));
 
         resultActions.andExpect(status().isOk());

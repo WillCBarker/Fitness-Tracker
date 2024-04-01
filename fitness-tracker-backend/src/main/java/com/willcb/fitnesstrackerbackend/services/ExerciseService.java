@@ -1,12 +1,13 @@
 package com.willcb.fitnesstrackerbackend.services;
 
-import com.willcb.fitnesstrackerbackend.entities.Exercise;
-import com.willcb.fitnesstrackerbackend.repositories.ExerciseRepository;
-
-import java.util.*;
+import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.willcb.fitnesstrackerbackend.entities.Exercise;
+import com.willcb.fitnesstrackerbackend.repositories.ExerciseRepository;
 
 @Service
 public class ExerciseService {
@@ -20,18 +21,18 @@ public class ExerciseService {
 
     private void validateExercise(Exercise exercise) {
         // Validate exercise input
-        if (exercise == null || exercise.getName() == null) {
+        if (exercise == null || exercise.getName() == null || exercise.getExerciseType() == null) {
             throw new IllegalArgumentException("Exercise details are incomplete");
         }
     }
 
     public Exercise getExerciseByID(Long exerciseID){
-        return this.exerciseRepository.findById(exerciseID)
+        return exerciseRepository.findById(exerciseID)
                 .orElseThrow(() -> new NoSuchElementException("Exercise with ID " + exerciseID + " not found"));
     }
 
     public List<Exercise> getAllExercises() {
-        return this.exerciseRepository.findAll();
+        return exerciseRepository.findAll();
     }
 
     public Exercise createExercise(Exercise exercise) {
@@ -43,15 +44,16 @@ public class ExerciseService {
     public Exercise updateExercise(Long id, Exercise updatedExercise) {
         validateExercise(updatedExercise);
 
-        Exercise existingExercise = this.exerciseRepository.findById(id)
+        Exercise existingExercise = exerciseRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Exercise not found"));
-
-        return this.exerciseRepository.save(existingExercise);
+        updatedExercise.setId(existingExercise.getId());
+        
+        return exerciseRepository.save(updatedExercise);
     }
 
     public boolean deleteExercise(Long id) {
-        if (this.exerciseRepository.existsById(id)) {
-            this.exerciseRepository.deleteById(id);
+        if (exerciseRepository.existsById(id)) {
+            exerciseRepository.deleteById(id);
             return true;
         } else {
             return false;
